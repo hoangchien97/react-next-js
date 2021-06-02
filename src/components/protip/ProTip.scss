@@ -1,0 +1,10 @@
+@import url("@styles/scss/variables");
+@import url("@styles/scss/mixins");
+
+.test {
+  color: red;
+
+  @media (min-width: $xxs) {
+    color: yellow;
+  }
+}
