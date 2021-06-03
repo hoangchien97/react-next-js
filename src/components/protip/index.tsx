@@ -1,12 +1,9 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Link from "@material-ui/core/Link";
-import SvgIcon, { SvgIconProps } from "@material-ui/core/SvgIcon";
-import Typography from "@material-ui/core/Typography";
-import { red } from "@styles/colors";
-
-// import "./index.scss"
-// import "@styles/index.css"
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Link from '@material-ui/core/Link';
+import SvgIcon, { SvgIconProps } from '@material-ui/core/SvgIcon';
+import Typography from '@material-ui/core/Typography';
+import { red, green } from '@styles/colors';
 
 function LightBulbIcon(props: SvgIconProps) {
   return (
@@ -19,12 +16,19 @@ function LightBulbIcon(props: SvgIconProps) {
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: theme.spacing(6, 0, 3),
-    backgroundColor: `${red}`,
+    backgroundColor: `${red}`
   },
   lightBulb: {
-    verticalAlign: "middle",
-    marginRight: theme.spacing(1),
+    verticalAlign: 'middle',
+    marginRight: theme.spacing(1)
   },
+
+  testMakeStyles: {
+    color: `${red}`,
+    [theme.breakpoints.up('sm')]: {
+      color: `${green}`
+    }
+  }
 }));
 
 function ProTip() {
@@ -33,13 +37,11 @@ function ProTip() {
     <>
       <Typography className={classes.root} color="textSecondary">
         <LightBulbIcon className={classes.lightBulb} />
-        Pro tip: See more{" "}
-        <Link href="https://material-ui.com/getting-started/templates/">
-          templates
-        </Link>{" "}
-        on the Material-UI documentation.
+        Pro tip: See more <Link href="https://material-ui.com/getting-started/templates/">templates</Link> on the
+        Material-UI documentation.
       </Typography>
       <div className="test">HOANG DUC CHIEN</div>
+      <div className={classes.testMakeStyles}>using makeStyles</div>
     </>
   );
 }

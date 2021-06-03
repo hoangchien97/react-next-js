@@ -1,13 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RFAppState } from '@stores';
 
-const isBrowser = typeof window !== 'undefined';
 interface CommonState {
   isMobile: boolean;
 }
 
 const initialState: CommonState = {
-  isMobile: true,
+  isMobile: true
 };
 
 const commonSlice = createSlice({

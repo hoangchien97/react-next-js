@@ -1,6 +1,6 @@
-import Axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import Axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
-const __DEV__ = process.env.NODE_ENV === "development";
+const __DEV__ = process.env.NODE_ENV === 'development';
 
 const ConnectionInstance = Axios.create({
   timeout: 20000,
@@ -21,7 +21,7 @@ const ConnectionInstance = Axios.create({
       }
     }
     return searchParams.toString();
-  },
+  }
 });
 
 ConnectionInstance.interceptors.request.use(
@@ -30,7 +30,7 @@ ConnectionInstance.interceptors.request.use(
   },
   (error) => {
     if (__DEV__) {
-      console.error("EGSwing API Request Error:", error);
+      console.error('EGSwing API Request Error:', error);
     }
     return Promise.reject(error);
   }
@@ -42,7 +42,7 @@ ConnectionInstance.interceptors.response.use(
     if (response.data?.token?.accessToken) {
       ConnectionInstance.defaults.headers = {
         ...ConnectionInstance.defaults.headers,
-        Authorization: `Bearer ${response.data?.token?.accessToken}`,
+        Authorization: `Bearer ${response.data?.token?.accessToken}`
       };
     }
 
@@ -50,7 +50,7 @@ ConnectionInstance.interceptors.response.use(
   },
   (error) => {
     if (__DEV__) {
-      console.error("EGSWING API Response Error:", error);
+      console.error('RedFox API Response Error:', error);
     }
     const errorMessage = error?.response?.data?.message;
     if (errorMessage) {

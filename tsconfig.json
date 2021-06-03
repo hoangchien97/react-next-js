@@ -25,8 +25,8 @@
       "@components/*": ["components/*"],
       // "@forms/*": ["forms/*"],
       "@pages/*": ["pages/*"],
-      // "@stores/*": ["stores/*"],
-      // "@services/*": ["services/*"],
+      "@stores/*": ["stores/*"],
+      "@services/*": ["services/*"],
       "@styles/*": ["styles/*"],
       "@public/*": ["public/*"]
     }

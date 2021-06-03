@@ -8,5 +8,6 @@ module.exports = {
     locales: ['en', 'vi'],
     localePath: path.resolve('./public/locales'),
     partialBundledLanguages: true,
+    localeDetection: false
   }
 };
