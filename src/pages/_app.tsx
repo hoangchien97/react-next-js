@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { AppProps } from "next/app";
 import { ThemeProvider } from "@material-ui/styles";
 import { createMuiTheme } from "@material-ui/core/styles";
@@ -5,15 +6,31 @@ import "@styles/index.css";
 import "@styles/scss/index.scss";
 import { appWithTranslation } from "next-i18next";
 import nextI18NextConfig from "../../next-i18next.config.js";
+import { Provider, useDispatch } from "react-redux";
+import { createWrapper } from "next-redux-wrapper";
+import { store } from "@stores";
+import { commonActions } from "@stores/slices/common";
 
 const theme = createMuiTheme();
 
+const makeStore = () => store;
+
 function App({ Component, pageProps }: AppProps) {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(commonActions.setViewPort(window.innerWidth));
+  }, []);
+
   return (
-    <ThemeProvider theme={theme}>
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </Provider>
   );
 }
 
-export default appWithTranslation(App, nextI18NextConfig);
+export default createWrapper(makeStore).withRedux(
+  appWithTranslation(App, nextI18NextConfig)
+);

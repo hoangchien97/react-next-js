@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { getTierByCountry } from "@services/http-client/home";
+import { useSelector } from "react-redux";
+import { selectIsMobile } from "@stores/slices/common";
 
 function Home() {
+  const isMobile = useSelector(selectIsMobile);
+
   const [tiers, setTiers] = useState([]);
 
   const getTier = async () => {
@@ -20,6 +24,7 @@ function Home() {
 
   return (
     <div>
+      {isMobile ? "Home Mobile" : "Home Desktop"}
       <p>Tier Feature VN</p>
       <div>
         {tiers.length > 0 &&
