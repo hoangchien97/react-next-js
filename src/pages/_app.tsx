@@ -19,6 +19,9 @@ function App({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     dispatch(commonActions.setViewPort(window.innerWidth));
+
+    const jssStyles = document.querySelector('#jss-server-side');
+    if (jssStyles && jssStyles.parentNode) jssStyles.parentNode.removeChild(jssStyles);
   }, []);
 
   return (
