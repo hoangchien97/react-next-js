@@ -5,7 +5,7 @@ import SvgIcon, { SvgIconProps } from "@material-ui/core/SvgIcon";
 import Typography from "@material-ui/core/Typography";
 import { red } from "@styles/colors";
 
-// import "./ProTip.scss"
+// import "./index.scss"
 // import "@styles/index.css"
 
 function LightBulbIcon(props: SvgIconProps) {
