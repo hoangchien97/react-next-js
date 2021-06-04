@@ -30,7 +30,7 @@ ConnectionInstance.interceptors.request.use(
   },
   (error) => {
     if (__DEV__) {
-      console.error('EGSwing API Request Error:', error);
+      console.error('RedFox API Request Error:', error);
     }
     return Promise.reject(error);
   }

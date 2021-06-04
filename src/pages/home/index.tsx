@@ -1,27 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { getTierByCountry } from '@services/http-client/home';
-import { useSelector } from 'react-redux';
-import { selectIsMobile } from '@stores/slices/common';
+import React from 'react';
 import Head from 'next/head';
+import { GetStaticProps } from 'next';
+import { useSelector } from 'react-redux';
+import { getTierByCountry } from '@services/http-client/home';
+import { selectIsMobile } from '@stores/slices/common';
+import { TopFeature } from '@interfaces/home';
 
-function Home() {
+interface HomeProps {
+  feature: TopFeature[];
+  employees: any;
+}
+
+function Home(props: HomeProps) {
   const isMobile = useSelector(selectIsMobile);
 
-  const [tiers, setTiers] = useState([]);
-
-  const getTier = async () => {
-    try {
-      const { data } = await getTierByCountry({ country: 'VN' });
-      console.log(`data`, data);
-      setTiers(data.data.feature);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    getTier();
-  }, []);
+  console.log('props', props);
 
   return (
     <>
@@ -34,14 +27,40 @@ function Home() {
         {isMobile ? 'Home Mobile' : 'Home Desktop'}
         <p>Tier Feature VN</p>
         <div>
-          {tiers.length > 0 &&
-            tiers.map((tier: any) => {
-              <p key={tier.id}>{tier.title}</p>;
-            })}
+          {props.feature.map((tier) => (
+            <p key={tier.id}>{tier.title}</p>
+          ))}
+        </div>
+
+        <div>
+          {props.employees.map((emp: any) => (
+            <p key={emp.id}>{emp.name}</p>
+          ))}
         </div>
       </div>
     </>
   );
 }
+
+// This function gets called at build time
+export const getStaticProps: GetStaticProps = async () => {
+  try {
+    const { data } = await getTierByCountry({ country: 'VN' });
+
+    const res = await fetch('https://5d3c0087552bfb00148e054a.mockapi.io/employees');
+    const employees = await res.json();
+
+    return {
+      props: {
+        feature: data.data.feature,
+        employees
+      }
+    };
+  } catch (error) {
+    return {
+      notFound: true
+    };
+  }
+};
 
 export default Home;

@@ -27,7 +27,7 @@ export default function App() {
         <meta name="keywords" content="Keywords" />
         <title>About RedFox</title>
       </Head>
-      <Container maxWidth="sm">
+      <Container maxWidth="xl">
         <Box my={4}>
           <Typography variant="h4" component="h1" gutterBottom>
             Create React App v4-beta example
